@@ -1,6 +1,13 @@
+.mainContainer {
+  /* position: relative; */
+  min-height: 50vh;
+  margin: 0;
+  padding: 0;
+}
+
 .footerContainer {
   color: rgba(200, 200, 200, 0.811);
-  /* position: absolute; */
+  position: absolute;
   bottom: 0;
   width: 100%;
   left: 0;
@@ -13,13 +20,17 @@
 }
 
 .navbarContainer {
-  background-color: #212121;
+  background-color: hsl(0deg 0% 0% / 10%);
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   width: 100%;
   height: 70px;
-  color: #bababa;
-  font-weight: 400;
+  color: #353535;
+  font-weight: 600;
+}
+
+.pointerChanger:hover {
+  cursor: pointer;
 }

@@ -1,8 +1,8 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import Layout from "@/components/Layout";
+import styles from "@/styles/Home.module.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -23,11 +23,11 @@ export default function App({ Component, pageProps }: AppProps) {
           rel="stylesheet"
         ></link>
       </Head>
-      <>
-        <Header />
-        <Component {...pageProps} />
-        <Footer />
-      </>
+      <div className={styles.mainContainer}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </div>
     </>
   );
 }

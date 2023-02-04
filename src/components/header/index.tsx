@@ -15,11 +15,11 @@ const Header = () => {
               <Link href="/about">About</Link>
             </div>
             <div className="col">
-              <Link href="/ninjalist">Ninja List</Link>
+              <Link href="/ninja">Ninja List</Link>
             </div>
           </div>
         </div>
-        <div className="col-md-1">
+        <div className={`col-md-1 ${styles.pointerChanger}`}>
           <div className="row">
             <div className="col-md-4">
               <span className="material-icons">account_circle</span>
