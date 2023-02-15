@@ -14,8 +14,11 @@ const Header = () => {
             <div className="col-md-1">
               <Link href="/about">About</Link>
             </div>
-            <div className="col">
+            <div className="col-md-1">
               <Link href="/ninja">Ninja List</Link>
+            </div>
+            <div className="col">
+              <Link href="/products">Ninja Products</Link>
             </div>
           </div>
         </div>
