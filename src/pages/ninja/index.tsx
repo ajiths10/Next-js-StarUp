@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
@@ -5,25 +6,44 @@ import StylesTable from "@/styles/Table.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-const inter = Inter({ subsets: ["latin"] });
+interface ninja {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  address: {
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: string;
+    geo: {
+      lat: string;
+      lng: string;
+    };
+  };
+  phone: string;
+  website: string;
+}
 
 export const getStaticProps = async () => {
   try {
-    let response: any = await axios.get(
+    let response = await axios.get(
       "https://jsonplaceholder.typicode.com/users/"
     );
 
     return {
-      props: { ninjas: response && response.data ? response.data : [] },
+      props: {
+        ninjas: response && response.data ? (response.data as ninja[]) : [],
+      },
     };
   } catch (error) {
     return {
-      props: { ninjas: [] },
+      props: { ninjas: [] as ninja[] },
     };
   }
 };
 
-export default function Home(props: any) {
+export default function Home({ ninjas }: { ninjas: ninja[] }) {
   const router = useRouter();
 
   return (
@@ -41,7 +61,7 @@ export default function Home(props: any) {
               </tr>
             </thead>
             <tbody>
-              {props.ninjas.map((buscat: any) => {
+              {ninjas.map((buscat: ninja) => {
                 return (
                   <tr
                     className={StylesTable.tableBody}

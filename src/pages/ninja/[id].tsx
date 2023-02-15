@@ -28,7 +28,7 @@ interface propsData {
 
 export const getStaticPaths = async () => {
   try {
-    let response: any = await axios.get(
+    let response = await axios.get(
       "https://jsonplaceholder.typicode.com/users/"
     );
 

@@ -1,12 +1,19 @@
 import fs from "fs/promises";
 import path from "path";
 
-const Products = ({ products }: any) => {
+interface product {
+  id: string;
+  title: string;
+  description: string;
+}
+[];
+
+const Products = ({ products }: { products: product[] }) => {
   return (
     <div className="container p-5 m-5">
       <ul>
         {products
-          ? products.map((buscat: any, index: number) => {
+          ? products?.map((buscat: product, index: number) => {
               return <li key={buscat.id}>{buscat.title}</li>;
             })
           : null}
@@ -22,7 +29,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      products: data.products,
+      products: data.products as product[],
     },
   };
 };
