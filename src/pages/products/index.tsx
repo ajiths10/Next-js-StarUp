@@ -6,7 +6,6 @@ interface product {
   title: string;
   description: string;
 }
-[];
 
 const Products = ({ products }: { products: product[] }) => {
   return (
@@ -23,15 +22,42 @@ const Products = ({ products }: { products: product[] }) => {
 };
 
 export const getStaticProps = async () => {
-  const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
-  let responseData: any = await fs.readFile(filePath);
-  const data = JSON.parse(responseData);
+  console.log("Re-Generating...");
 
-  return {
-    props: {
-      products: data.products as product[],
-    },
-  };
+  try {
+    const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
+    let responseData: any = await fs.readFile(filePath);
+    const data = JSON.parse(responseData);
+
+    if (!data || !data.products.length)
+      throw new Error("No data found, Redirecting to / ...!!");
+
+    return {
+      props: {
+        products: data.products as product[],
+      },
+      revalidate: 10, // create build in 10sec (cal 10sec with prev req, not every 10sec)
+      notFound: false, // return 404 page (boolean)
+      // redirect: {
+      //   destination: '/no-data' // redirect object will be redirect the route to new one (as we defined)
+      // }
+    };
+  } catch (err: any) {
+    console.log("Error server side ==>", err.message);
+    if (err.message === "No data found, Redirecting to / ...!!") {
+      return {
+        props: {},
+        redirect: {
+          destination: "/", // redirection
+        },
+      };
+    }
+
+    return {
+      props: {},
+      notFound: true, //404 page handle
+    };
+  }
 };
 
 export default Products;
