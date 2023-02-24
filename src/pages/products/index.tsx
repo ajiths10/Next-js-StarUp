@@ -1,11 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
-
-interface product {
-  id: string;
-  title: string;
-  description: string;
-}
+import { product } from "@/components/types/product";
+import Link from "next/link";
 
 const Products = ({ products }: { products: product[] }) => {
   return (
@@ -13,7 +9,11 @@ const Products = ({ products }: { products: product[] }) => {
       <ul>
         {products
           ? products?.map((buscat: product, index: number) => {
-              return <li key={buscat.id}>{buscat.title}</li>;
+              return (
+                <li key={buscat.id}>
+                  <Link href={`/products/${buscat.id}`}>{buscat.title}</Link>
+                </li>
+              );
             })
           : null}
       </ul>
