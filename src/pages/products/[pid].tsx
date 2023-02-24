@@ -32,17 +32,22 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
 
 export const getStaticPaths: GetStaticPaths = () => {
   return {
-    paths: [
-      { params: { pid: "p1" } },
-      { params: { pid: "p2" } },
-      { params: { pid: "p3" } },
-    ],
-    fallback: false,
+    paths: [{ params: { pid: "p1" } }],
+    // fallback: true, //we need to handle the undefined value exeption (like !loadedProduct)
+    fallback: "blocking", // Will automatically block , but little slow, no need to handle any situaton
   };
 };
 
 const ProductItem = (props: { loadedProduct: product }) => {
   const { loadedProduct } = props;
+
+  //   if (!loadedProduct)
+  //     return (
+  //       <div className="container p-5 m-5">
+  //         {" "}
+  //         <p>Loading...</p>
+  //       </div>
+  //     );
 
   return (
     <div className="container p-5 m-5">
