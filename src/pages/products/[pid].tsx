@@ -24,6 +24,10 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
       (item: product) => item.id === productId
     );
 
+    if (!productId) {
+      return { notFound: true };
+    }
+
     return {
       props: {
         loadedProduct: productItem,
@@ -50,7 +54,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: pathParams,
     // fallback: true, //we need to handle the undefined value exeption (like !loadedProduct)
     // fallback: "blocking", // Will automatically block , but little slow, no need to handle any situaton
-    fallback: false, // will create all posible ids file (pre generate all)
+    // fallback: false, // will create all posible ids file (pre generate all)
+    fallback: true, //for handling no product data with - notFound: true
   };
 };
 
