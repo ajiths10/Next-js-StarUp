@@ -1,18 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-import fs from "fs/promises";
-import path from "path";
-import { product } from "@/components/types/product";
-
-const getData = async () => {
-  try {
-    const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
-    let responseData: any = await fs.readFile(filePath);
-    const data = await JSON.parse(responseData);
-    return data;
-  } catch (error) {
-    return error;
-  }
-};
+import { product } from "@/components/products/types/product";
+import { getData } from "@/components/products/common/product";
 
 export const getStaticProps: GetStaticProps = async (context: any) => {
   const { params } = context;
@@ -24,9 +12,9 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
       (item: product) => item.id === productId
     );
 
-    if (!productId) {
-      return { notFound: true };
-    }
+    // if (!productId) {
+    //   return { notFound: true };
+    // }
 
     return {
       props: {
@@ -54,8 +42,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: pathParams,
     // fallback: true, //we need to handle the undefined value exeption (like !loadedProduct)
     // fallback: "blocking", // Will automatically block , but little slow, no need to handle any situaton
-    // fallback: false, // will create all posible ids file (pre generate all)
-    fallback: true, //for handling no product data with - notFound: true
+    fallback: false, // will create all posible ids file (pre generate all)
+    //fallback: true, //for handling no product data with - notFound: true
   };
 };
 

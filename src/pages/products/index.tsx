@@ -1,7 +1,7 @@
-import fs from "fs/promises";
-import path from "path";
-import { product } from "@/components/types/product";
 import Link from "next/link";
+import { product } from "@/components/products/types/product";
+import { getData } from "@/components/products/common/product";
+import { GetStaticProps } from "next";
 
 const Products = ({ products }: { products: product[] }) => {
   return (
@@ -21,13 +21,11 @@ const Products = ({ products }: { products: product[] }) => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   console.log("Re-Generating...");
 
   try {
-    const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
-    let responseData: any = await fs.readFile(filePath);
-    const data = JSON.parse(responseData);
+    let data = await getData();
 
     if (!data || !data.products.length)
       throw new Error("No data found, Redirecting to / ...!!");
