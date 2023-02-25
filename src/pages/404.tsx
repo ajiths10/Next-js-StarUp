@@ -23,7 +23,7 @@ const NotFound = () => {
   }, []);
 
   return (
-    <div className="container p-5 m-5 ">
+    <div>
       <Image
         src="/404-error-concept-illustration-free-vector.jpg"
         alt="Next.js Logo"

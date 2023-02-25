@@ -48,7 +48,7 @@ export default function Home({ ninjas }: { ninjas: ninja[] }) {
 
   return (
     <div className={styles.mainContainer}>
-      <div className="container p-5 m-5 ">
+      <div>
         <h1>Ninjas List </h1>
         <div className="container">
           <table className="table table-hover">

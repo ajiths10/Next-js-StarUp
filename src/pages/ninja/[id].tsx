@@ -68,7 +68,7 @@ export const getStaticProps = async (context: getId) => {
 
 const Ninja = ({ ninjas }: propsData) => {
   return (
-    <div className="conatiner p-5 my-5 ">
+    <div>
       <h2>Ninja Details</h2>
       <div>
         <p>

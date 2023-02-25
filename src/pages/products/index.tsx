@@ -5,13 +5,26 @@ import { GetStaticProps } from "next";
 
 const Products = ({ products }: { products: product[] }) => {
   return (
-    <div className="container p-5 m-5">
+    <div>
       <ul>
         {products
           ? products?.map((buscat: product, index: number) => {
               return (
                 <li key={buscat.id}>
-                  <Link href={`/products/${buscat.id}`}>{buscat.title}</Link>
+                  <div className="grid gap-3 ">
+                    <Link
+                      href={`/products/${buscat.id}`}
+                      className="p-2 g-col-6"
+                    >
+                      {buscat.title}
+                    </Link>
+                    <Link
+                      href={`/products/seller/s${index + 1}`}
+                      className="p-2 g-col-6"
+                    >
+                      {"--> Seller details"}
+                    </Link>
+                  </div>
                 </li>
               );
             })

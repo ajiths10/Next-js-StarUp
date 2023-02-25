@@ -59,7 +59,7 @@ const ProductItem = (props: { loadedProduct: product }) => {
   //     );
 
   return (
-    <div className="container p-5 m-5">
+    <div>
       <h1>{loadedProduct.title}</h1>
       <p>{loadedProduct.description}</p>
     </div>
