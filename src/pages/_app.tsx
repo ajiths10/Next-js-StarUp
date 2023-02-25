@@ -3,6 +3,10 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import Layout from "@/components/Layout";
 import styles from "@/styles/Home.module.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -23,11 +27,18 @@ export default function App({ Component, pageProps }: AppProps) {
           rel="stylesheet"
         ></link>
       </Head>
-      <div className={styles.mainContainer}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <>
+          <div className={styles.mainContainer}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </div>
+          {process.env.SERVER_ENVIRONMENT === "staging" ? (
+            <ReactQueryDevtools />
+          ) : null}
+        </>
+      </QueryClientProvider>
     </>
   );
 }

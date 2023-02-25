@@ -1,7 +1,16 @@
 import { GetServerSideProps } from "next";
 import { seller } from "@/components/products/types/seller";
+import Link from "next/link";
+
 const SellerUser = (props: seller) => {
-  return <div>{"Seller: Nauto-" + props.id}</div>;
+  return (
+    <div>
+      <h1>{"Seller: Nauto-" + props.id}</h1>
+      <div>
+        <Link href={`/products/seller/${props.sellerId}/report`}>Report</Link>
+      </div>
+    </div>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -12,6 +21,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       id: "seller-id-" + sellerId,
+      sellerId,
     },
   };
 };

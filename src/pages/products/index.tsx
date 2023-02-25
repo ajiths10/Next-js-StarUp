@@ -8,7 +8,7 @@ const Products = ({ products }: { products: product[] }) => {
     <div>
       <ul>
         {products
-          ? products?.map((buscat: product, index: number) => {
+          ? products?.map((buscat: product) => {
               return (
                 <li key={buscat.id}>
                   <div className="grid gap-3 ">
@@ -19,7 +19,7 @@ const Products = ({ products }: { products: product[] }) => {
                       {buscat.title}
                     </Link>
                     <Link
-                      href={`/products/seller/s${index + 1}`}
+                      href={`/products/seller/${buscat.seller_id}`}
                       className="p-2 g-col-6"
                     >
                       {"--> Seller details"}
